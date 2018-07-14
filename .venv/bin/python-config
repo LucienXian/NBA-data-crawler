@@ -1,4 +1,4 @@
-#!/home/lucienxian/Study/NBA_spider/venv/bin/python
+#!/home/lucienxian/Study/NBA_spider/.venv/bin/python
 
 import sys
 import getopt
