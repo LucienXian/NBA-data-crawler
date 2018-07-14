@@ -5,8 +5,9 @@ from bs4 import BeautifulSoup
 import re
 import pandas as pd
 
-PLAYER_INFO_CON = ('全名','位置','身高','体重','出生年月','出生城市')
+PLAYER_INFO_CON = ('英文名','位置','身高','体重','出生年月','出生城市','中文名')
 INFO_NUM = 6
+EXP_NUM = [145, 509,519,1828, 2276, 4079, 4420]
 
 def getNBASingleData():
     player_num = 4654
@@ -15,7 +16,7 @@ def getNBASingleData():
     list_data = []
     for i in range(1, player_num):
         url_ = url % i
-        if i == 1828 or i == 2276 or i==4079 or i==4420:
+        if i in EXP_NUM:
             continue
         print("crawl url:" + url_)
         try:
@@ -26,19 +27,27 @@ def getNBASingleData():
         
         soup = BeautifulSoup(html)
         mydivs = soup.findAll("div", {"class": "detail"})
-        
+        title = soup.find('title')
+        name_idx = title.text.find('/')
+        if name_idx == -1:
+            continue
+        chinese_name = title.text[:name_idx]
+        print(chinese_name)
         for div in mydivs:
             num = INFO_NUM
             if len(div.findAll("div", {"class": "row"})) < num:
                 print(len(div.findAll("div", {"class": "row"})))
                 break
+            
             for d in div.findAll("div", {"class": "row"}):
                 num -= 1
                 s = None
                 s = d.text.split(':')[1]
+                print(s)
                 list_data.append(s)
                 if num==0:
                     break
+            list_data.append(chinese_name)
             print('....', num)
     return list_data
 
@@ -56,7 +65,7 @@ def getNBAAllData():
 def saveDataToExcel(datasets,sheetname, writer):
     df = pd.DataFrame(columns=PLAYER_INFO_CON)
  
-    num = INFO_NUM
+    num = INFO_NUM+1
     row_cnt = 0
     data_cnt = 0
     data_len = len(datasets)
@@ -75,7 +84,7 @@ def saveDataToExcel(datasets,sheetname, writer):
 
 if __name__ == "__main__":
     
-    filename = 'nba_player_info.xlsx'
+    filename = 'nba_player_info3.xlsx'
     writer = pd.ExcelWriter(filename)
     sheetname = 'player_info'
     datasets = getNBAAllData()
