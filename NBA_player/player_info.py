@@ -5,9 +5,11 @@ from bs4 import BeautifulSoup
 import re
 import pandas as pd
 
-PLAYER_INFO_CON = ('英文名','位置','身高','体重','出生年月','出生城市','中文名')
+PLAYER_INFO_CON = ('英文名','位置','身高','体重','出生年月','出生城市','中文名','图片链接')
 INFO_NUM = 6
 EXP_NUM = [145, 509,519,1828, 2276, 4079, 4420]
+IMG_URL = "http://stat-nba.com%s"
+DEFAULT_URL = "http://stat-nba.com/image/playerImage/img_middle_common.jpg"
 
 def getNBASingleData():
     player_num = 4654
@@ -33,6 +35,19 @@ def getNBASingleData():
             continue
         chinese_name = title.text[:name_idx]
         print(chinese_name)
+
+        img_url = DEFAULT_URL
+        img_div = soup.find('div', {'class':'image'})
+        if not img_div:
+            img_url = DEFAULT_URL
+        else:
+            img_src = img_div.find('img', src=True)
+            if not img_src:
+                img_url = DEFAULT_URL
+            else:
+                img_url = IMG_URL % (img_src['src'])
+        print(img_url)      
+
         for div in mydivs:
             num = INFO_NUM
             if len(div.findAll("div", {"class": "row"})) < num:
@@ -48,6 +63,7 @@ def getNBASingleData():
                 if num==0:
                     break
             list_data.append(chinese_name)
+            list_data.append(img_url)
             print('....', num)
     return list_data
 
@@ -65,7 +81,7 @@ def getNBAAllData():
 def saveDataToExcel(datasets,sheetname, writer):
     df = pd.DataFrame(columns=PLAYER_INFO_CON)
  
-    num = INFO_NUM+1
+    num = INFO_NUM+2
     row_cnt = 0
     data_cnt = 0
     data_len = len(datasets)
@@ -84,7 +100,7 @@ def saveDataToExcel(datasets,sheetname, writer):
 
 if __name__ == "__main__":
     
-    filename = 'nba_player_info3.xlsx'
+    filename = 'nba_player_info.xlsx'
     writer = pd.ExcelWriter(filename)
     sheetname = 'player_info'
     datasets = getNBAAllData()
