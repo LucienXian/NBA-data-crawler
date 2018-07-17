@@ -36,14 +36,17 @@ data = [
 }
 ]
 
-
-
-
+'''
+写入，这个不用管
+'''
 with open('testJson', 'w+') as json_file:
     jsoned_data = json.dumps(data, indent=4)
     json_file.write(jsoned_data)
 
 
+'''
+读取，遍历文件，提取出json中列表的每一项
+'''
 with open('testJson', 'r') as json_file:
     json_data = json.load(json_file)
     for key in json_data:
