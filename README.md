@@ -16,6 +16,26 @@ xlrd            1.1.0
 
 ## 球队
 
+
+
+有些文件名用了球队代号作为区分，比如nba_team_reg_data(CHI).xlsw，就是公牛队的数据：
+
+```python
+{'ATL':老鹰, 'CHI':公牛,'BKN':篮网,'CHA':黄蜂,'CLE':骑士,'BOS':凯尔特人,'MIA':热火,
+                    
+ 'DET':活塞,'NYK':尼克斯,'ORL':魔术,'IND':步行者,'PHI':76人,'WAS':奇才,'MIL':雄鹿,
+                    
+ 'TOR':猛龙,'GSW':勇士,'DEN':掘金,'DAL':独行侠,'LAC':快船,'MIN':森林狼,'HOU':火箭,
+                    
+ 'LAL':湖人,'OKC':雷霆,'MEM':灰熊,'PHO':太阳,'POR':开拓者,'NOH':鹈鹕,'SAC':国王,
+ 
+ 'UTA':爵士,'SAS':马刺}
+```
+
+
+
+
+
 * NBA_team_info
 
 **team_info.xlsx**：球队的基本信息，字段如下：
