@@ -4,7 +4,7 @@ data = [
 {
     "entities": {
         "description": {
-            "urls": []
+            "urls": 2
         }
     },
     "utc_offset": -10800,
@@ -21,12 +21,12 @@ data = [
 {
     "entities": {
         "description": {
-            "urls": []
+            "urls": 2
         }
     },
     "utc_offset": -10500,
     "id" : 5,
-    "name": "Scrapy网络爬虫实战[保存为Json文件及存储到mysql数据库]. 2016年09月18 ... Scrapy 是一个为了爬取网站数据，提取结构性数据而编写的python应用框架。 可以应用在 .... 下一篇Java多线程网络爬虫(时光网为例). 想对作者说点 ...",
+    "name": "中国人",
     "hit_count": 554,
     "private": False,
     "active_last_month": False,
@@ -48,3 +48,5 @@ with open('testJson', 'r') as json_file:
     json_data = json.load(json_file)
     for key in json_data:
         print(key["name"])
+        print(key["hit_count"])
+        print(key["entities"]["description"]["urls"])

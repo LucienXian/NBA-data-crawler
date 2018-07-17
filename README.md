@@ -1,6 +1,18 @@
 # 该项目为相关nba数据的爬虫
 
 
+在目录NBA\_team\_info/下有一个读取excel文件的脚本——**[test_read.py](https://github.com/LucienXian/NBA-data-crawler/blob/master/NBA_team_info/test_read.py)**
+在主目录下有一个读取json文件的脚本——**[test_json.py](https://github.com/LucienXian/NBA-data-crawler/blob/master/test_json.py)**
+
+## 第三方库
+
+```shell
+beautifulsoup4  4.6.0 
+pandas          0.23.3
+xlrd            1.1.0
+```
+
+
 
 ## 球队
 
@@ -92,7 +104,7 @@
 
 ## 新闻
 
-目前的新闻来源有：新浪(sina)、网易(netease)
+目前的新闻来源有：新浪(sina)、网易(netease)、搜狐(sohu)、虎扑(hupu)
 
 新闻以json存储，只有4个字段：
 

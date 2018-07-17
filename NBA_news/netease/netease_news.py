@@ -89,7 +89,7 @@ def getNBAAllData(url):
 if __name__ == "__main__":
     url = 'http://sports.163.com/special/%s/'
 
-    filename = 'netease'
+    filename = 'netease.json'
     data = []
     for team in TEAM:
         url_ = url % team
@@ -99,3 +99,4 @@ if __name__ == "__main__":
     with open(filename, 'w+') as json_file:
         jsoned_data = json.dumps(data, indent=4)
         json_file.write(jsoned_data)
+
